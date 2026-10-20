@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZASTECH.ID — Next-Gen Interactive Digital Agency</title>
 
+  <!-- Favicon / Logo Kecil di Tab Browser (Inline SVG Data URI — Mandiri Tanpa File Eksternal) -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300F2FE'/%3E%3Cstop offset='50%25' stop-color='%234FACFE'/%3E%3Cstop offset='100%25' stop-color='%237F00FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%23090A0F'/%3E%3Crect x='3' y='3' width='58' height='58' rx='14' fill='none' stroke='url(%23g)' stroke-width='3'/%3E%3Cpath d='M20 20 H44 L24 44 H44' fill='none' stroke='url(%23g)' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23090A0F'/%3E%3Cpath d='M20 20 H44 L24 44 H44' fill='none' stroke='%2300F2FE' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+  />
+
   <!-- Tailwind CSS v3.4.17 via CDN -->
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 
@@ -967,8 +978,8 @@
                 </div>
                 <div class="min-w-0">
                   <p data-i18n="contact.emailLabel" class="text-[11px] font-mono uppercase text-slate-400">Surel Resmi Agensi</p>
-                  <a href="mailto:zafrielakn3@gmail.com" class="font-mono font-bold text-sm sm:text-base text-white hover:text-neon-cyan truncate block">
-                    zafrielakn3@gmail.com
+                  <a href="mailto:hello@zastech.id" class="font-mono font-bold text-sm sm:text-base text-white hover:text-neon-cyan truncate block">
+                    hello@zastech.id
                   </a>
                 </div>
               </div>
@@ -2013,7 +2024,7 @@
 
       // Copy Official Email Button
       document.getElementById('btn-copy-email').addEventListener('click', () => {
-        const email = 'zafrielakn3@gmail.com';
+        const email = 'hello@zastech.id';
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(email).catch(() => {});
         } else {
@@ -2031,7 +2042,7 @@
             labelEl.textContent = I18N_DICTIONARY[currentLang]['contact.copyBtn'];
           }, 2000);
         }
-        showToast(currentLang === 'id' ? 'Alamat email zafrielakn3@gmail.com disalin!' : 'Email zafrielakn3@gmail.com copied!');
+        showToast(currentLang === 'id' ? 'Alamat email hello@zastech.id disalin!' : 'Email hello@zastech.id copied!');
       });
 
       // Service Pills inside Contact Form

@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZASTECH.ID — Next-Gen Interactive Digital Agency</title>
+
+  <!-- Tailwind CSS v3.4.17 via CDN -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+
+  <!-- FontAwesome 6.5.1 via CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Google Fonts: Space Grotesk (Display), Plus Jakarta Sans (Body), JetBrains Mono (Tech Tags) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            space: {
+              950: '#090A0F',
+              900: '#0D0F18',
+              800: '#131726',
+              700: '#1C2237'
+            },
+            neon: {
+              cyan: '#00F2FE',
+              blue: '#4FACFE',
+              violet: '#7F00FF',
+              magenta: '#E100FF'
+            }
+          },
+          fontFamily: {
+            display: ['Space Grotesk', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* ==========================================================================
+       CORE THEME, NEUMORPHISM, NEON GLOW & CUSTOM CURSOR (ACTIVE THEORY STYLE)
+       ========================================================================== */
+    :root {
+      --bg-deep: #090A0F;
+      --cyan-glow: #00F2FE;
+      --blue-glow: #4FACFE;
+      --violet-glow: #7F00FF;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: #090A0F;
+      color: #F1F5F9;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Sembunyikan kursor bawaan hanya di layar desktop dengan mouse presisi */
+    @media (pointer: fine) {
+      body.custom-cursor-ready,
+      body.custom-cursor-ready a,
+      body.custom-cursor-ready button,
+      body.custom-cursor-ready input,
+      body.custom-cursor-ready textarea,
+      body.custom-cursor-ready select {
+        cursor: none !important;
+      }
+    }
+
+    /* Kursor Kustom (Dot + Outer Ring Trail) */
+    #cursor-dot,
+    #cursor-ring {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.25s ease;
+    }
+
+    #cursor-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      background: #00F2FE;
+      box-shadow: 0 0 14px #00F2FE, 0 0 28px #00F2FE;
+      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+    }
+
+    #cursor-ring {
+      width: 38px;
+      height: 38px;
+      border-radius: 9999px;
+      border: 1.5px solid rgba(0, 242, 254, 0.55);
+      background: radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, rgba(127, 0, 255, 0.03) 70%, transparent 100%);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+      transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  height 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s ease,
+                  background-color 0.25s ease;
+    }
+
+    body.cursor-hover #cursor-dot {
+      width: 12px;
+      height: 12px;
+      background: #FFFFFF;
+    }
+
+    body.cursor-hover #cursor-ring {
+      width: 64px;
+      height: 64px;
+      border-color: rgba(0, 242, 254, 0.95);
+      background: rgba(0, 242, 254, 0.12);
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.4), inset 0 0 15px rgba(127, 0, 255, 0.3);
+    }
+
+    @media (pointer: coarse), (max-width: 768px) {
+      #cursor-dot,
+      #cursor-ring {
+        display: none !important;
+      }
+    }
+
+    /* Dark Neumorphism & Glassmorphism Cards */
+    .cyber-glass {
+      background: linear-gradient(145deg, rgba(19, 23, 38, 0.78) 0%, rgba(11, 13, 22, 0.88) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 8px 8px 24px rgba(3, 4, 8, 0.75),
+                  -4px -4px 16px rgba(255, 255, 255, 0.02);
+    }
+
+    .cyber-glass-interactive {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.35s ease,
+                  box-shadow 0.35s ease;
+    }
+
+    .cyber-glass-interactive:hover {
+      border-color: rgba(0, 242, 254, 0.45);
+      box-shadow: 0 20px 45px -15px rgba(0, 242, 254, 0.22),
+                  0 0 25px rgba(127, 0, 255, 0.15);
+    }
+
+    /* Text Gradients & Neon Glows */
+    .text-gradient-cyan {
+      background: linear-gradient(135deg, #FFFFFF 0%, #00F2FE 50%, #4FACFE 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .text-gradient-cyber {
+      background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 45%, #A855F7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .neon-logo-glow {
+      text-shadow: 0 0 18px rgba(0, 242, 254, 0.55), 0 0 36px rgba(79, 172, 254, 0.3);
+    }
+
+    .btn-neon-primary {
+      background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 55%, #7F00FF 100%);
+      background-size: 200% 200%;
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.35), 0 8px 20px -6px rgba(127, 0, 255, 0.5);
+      transition: all 0.35s ease;
+    }
+    .btn-neon-primary:hover {
+      background-position: 100% 50%;
+      box-shadow: 0 0 35px rgba(0, 242, 254, 0.65), 0 10px 28px -4px rgba(127, 0, 255, 0.7);
+      transform: translateY(-2px);
+    }
+
+    /* Background Grid Overlay */
+    .bg-cyber-grid {
+      background-size: 48px 48px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    /* Smooth Scroll-Triggered Reveal Animations */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(28px) scale(0.98);
+      filter: blur(6px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-item.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    /* 3D Tilt Portfolio Card Container */
+    .tilt-card {
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .tilt-card-inner {
+      transform: translateZ(20px);
+    }
+
+    /* Sembunyikan Scrollbar Horizontal pada Filter Mobile */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090A0F;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1E293B;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00F2FE;
+    }
+  </style>
+</head>
+
+<body class="custom-cursor-ready selection:bg-neon-cyan selection:text-space-950">
+
+  <!-- ==========================================================================
+       CUSTOM CURSOR & MOUSE-FOLLOW GLOW AURA
+       ========================================================================== -->
+  <div id="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+  <div
+    id="mouse-glow-aura"
+    aria-hidden="true"
+    class="pointer-events-none fixed top-0 left-0 w-[420px] h-[420px] rounded-full opacity-25 blur-[110px] -translate-x-1/2 -translate-y-1/2 z-0 hidden md:block transition-opacity duration-500"
+    style="background: radial-gradient(circle, #00F2FE 0%, #4FACFE 40%, #7F00FF 80%, transparent 100%);"
+  ></div>
+
+  <!-- ==========================================================================
+       A. STICKY HEADER / NAVBAR (RESPONSIVE + DUAL LANGUAGE TOGGLE ID | EN)
+       ========================================================================== -->
+  <header
+    id="main-navbar"
+    class="fixed top-0 inset-x-0 z-40 transition-all duration-300 bg-space-950/80 backdrop-blur-xl border-b border-white/10"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3">
+      
+      <!-- Brand Logo "ZASTECH.ID" -->
+      <a
+        href="#hero"
+        data-interactive="true"
+        class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none shrink-0"
+      >
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-neon-cyan via-neon-blue to-neon-violet p-[1.5px] shadow-lg shadow-neon-cyan/20 group-hover:scale-105 transition-transform">
+          <div class="w-full h-full bg-space-950 rounded-[10px] flex items-center justify-center">
+            <span class="font-display font-bold text-base sm:text-lg text-neon-cyan neon-logo-glow">Z</span>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-display font-bold text-base sm:text-xl tracking-wider text-white neon-logo-glow">
+              ZASTECH<span class="text-neon-cyan">.ID</span>
+            </span>
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-widest bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/30">
+              LABS // 2026
+            </span>
+          </div>
+          <span class="text-[10px] font-mono text-slate-400 tracking-wider hidden sm:block">INTERACTIVE DIGITAL AGENCY</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav aria-label="Main Navigation" class="hidden lg:flex items-center gap-1 xl:gap-2">
+        <a
+          href="#about"
+          data-interactive="true"
+          data-i18n="nav.about"
+          class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-neon-cyan hover:bg-white/5 transition-all"
+        >Tentang Kami</a>
+        <a
+          href="#services"
+          data-interactive="true"
+          data-i18n="nav.services"
+          class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-neon-cyan hover:bg-white/5 transition-all"
+        >Layanan</a>
+        <a
+          href="#works"
+          data-interactive="true"
+          data-i18n="nav.works"
+          class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-neon-cyan hover:bg-white/5 transition-all"
+        >Karya Pilihan</a>
+        <a
+          href="#insights"
+          data-interactive="true"
+          data-i18n="nav.insights"
+          class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-neon-cyan hover:bg-white/5 transition-all"
+        >Wawasan &amp; Lab</a>
+        <a
+          href="#contact"
+          data-interactive="true"
+          data-i18n="nav.contact"
+          class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-neon-cyan hover:bg-white/5 transition-all"
+        >Kontak</a>
+      </nav>
+
+      <!-- Right Controls: Dual Language Switcher (ID | EN) + CTA + Mobile Menu Trigger -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        
+        <!-- Sticky Dual Language Toggle (ID | EN) -->
+        <div
+          class="inline-flex items-center p-1 rounded-xl bg-space-800/90 border border-white/10 shadow-inner"
+          role="group"
+          aria-label="Language Switcher"
+        >
+          <button
+            id="btn-lang-id"
+            type="button"
+            data-interactive="true"
+            class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all bg-gradient-to-r from-neon-cyan to-neon-blue text-space-950 shadow-sm"
+          >
+            ID
+          </button>
+          <button
+            id="btn-lang-en"
+            type="button"
+            data-interactive="true"
+            class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all text-slate-400 hover:text-white"
+          >
+            EN
+          </button>
+        </div>
+
+        <!-- Desktop Quick CTA -->
+        <a
+          href="#contact"
+          data-interactive="true"
+          class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-space-950 btn-neon-primary"
+        >
+          <span data-i18n="nav.cta">Mulai Proyek</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button
+          id="btn-mobile-menu"
+          type="button"
+          aria-label="Toggle Mobile Navigation"
+          class="lg:hidden w-10 h-10 rounded-xl bg-space-800/90 border border-white/10 text-slate-200 hover:text-neon-cyan flex items-center justify-center transition-colors"
+        >
+          <i id="icon-mobile-menu" class="fa-solid fa-bars-staggered text-base"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Navigation Dropdown Drawer -->
+    <div
+      id="mobile-menu-drawer"
+      class="lg:hidden hidden bg-space-900/98 backdrop-blur-2xl border-b border-white/10 px-4 pt-3 pb-6 space-y-3"
+    >
+      <div class="grid grid-cols-1 gap-1">
+        <a
+          href="#about"
+          data-i18n="nav.about"
+          class="mobile-nav-link px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-200 hover:bg-white/5 hover:text-neon-cyan transition-colors"
+        >Tentang Kami</a>
+        <a
+          href="#services"
+          data-i18n="nav.services"
+          class="mobile-nav-link px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-200 hover:bg-white/5 hover:text-neon-cyan transition-colors"
+        >Layanan</a>
+        <a
+          href="#works"
+          data-i18n="nav.works"
+          class="mobile-nav-link px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-200 hover:bg-white/5 hover:text-neon-cyan transition-colors"
+        >Karya Pilihan</a>
+        <a
+          href="#insights"
+          data-i18n="nav.insights"
+          class="mobile-nav-link px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-200 hover:bg-white/5 hover:text-neon-cyan transition-colors"
+        >Wawasan &amp; Lab</a>
+        <a
+          href="#contact"
+          data-i18n="nav.contact"
+          class="mobile-nav-link px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-200 hover:bg-white/5 hover:text-neon-cyan transition-colors"
+        >Kontak</a>
+      </div>
+      <div class="pt-2 border-t border-white/10 flex items-center justify-between gap-3">
+        <a
+          href="#works"
+          class="mobile-nav-link flex-1 py-2.5 px-4 rounded-xl text-center text-xs font-bold text-space-950 btn-neon-primary"
+          data-i18n="hero.ctaPrimary"
+        >Explore Our Works</a>
+        <a
+          href="#contact"
+          class="mobile-nav-link flex-1 py-2.5 px-4 rounded-xl text-center text-xs font-bold text-white bg-white/10 border border-white/15"
+          data-i18n="hero.ctaSecondary"
+        >Get in Touch</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       B. HERO SECTION WITH INTERACTIVE 3D PARTICLE / CONSTELLATION CANVAS
+       ========================================================================== -->
+  <section
+    id="hero"
+    class="relative min-h-screen flex items-center justify-center pt-24 pb-16 sm:pt-32 sm:pb-24 overflow-hidden bg-cyber-grid"
+  >
+    <!-- Interactive HTML5 Canvas Engine -->
+    <canvas
+      id="hero-particle-canvas"
+      class="absolute inset-0 w-full h-full pointer-events-none z-0"
+    ></canvas>
+
+    <!-- Ambient Neon Blobs -->
+    <div class="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-neon-cyan/15 blur-[130px] pointer-events-none"></div>
+    <div class="absolute bottom-10 -right-32 w-96 h-96 rounded-full bg-neon-violet/20 blur-[140px] pointer-events-none"></div>
+
+    <!-- Hero Content Container -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
+        
+        <!-- Status Pill -->
+        <div class="reveal-item inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full cyber-glass border border-neon-cyan/30 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-neon-cyan animate-ping"></span>
+          <span class="w-2 h-2 rounded-full bg-neon-cyan -ml-4"></span>
+          <span data-i18n="hero.badge" class="text-neon-cyan font-semibold tracking-wide">
+            SEMI-INTERNATIONAL INTERACTIVE DIGITAL AGENCY
+          </span>
+        </div>
+
+        <!-- Bilingual Main Headline -->
+        <h1
+          data-i18n="hero.headline"
+          class="reveal-item font-display font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.12] text-gradient-cyan"
+        >
+          Membangun Pengalaman Digital Masa Depan yang Imersif &amp; Berdampak.
+        </h1>
+
+        <!-- Interactive Sub-Headline -->
+        <p
+          data-i18n="hero.subheadline"
+          class="reveal-item text-sm sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal"
+        >
+          Zastech.id memadukan rekayasa kreatif WebGL, arsitektur aplikasi web berkinerja tinggi, dan desain UI/UX futuristik untuk menciptakan produk digital berstandar global.
+        </p>
+
+        <!-- Call-To-Action Buttons -->
+        <div class="reveal-item pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4">
+          <a
+            href="#works"
+            data-interactive="true"
+            class="w-full sm:w-auto px-7 py-4 rounded-2xl font-display font-bold text-sm sm:text-base text-space-950 btn-neon-primary flex items-center justify-center gap-2.5"
+          >
+            <span data-i18n="hero.ctaPrimary">Explore Our Works</span>
+            <i class="fa-solid fa-arrow-down-long text-xs"></i>
+          </a>
+
+          <a
+            href="#contact"
+            data-interactive="true"
+            class="w-full sm:w-auto px-7 py-4 rounded-2xl font-display font-bold text-sm sm:text-base text-white cyber-glass hover:border-neon-cyan/60 hover:bg-white/10 transition-all flex items-center justify-center gap-2.5"
+          >
+            <i class="fa-regular fa-paper-plane text-neon-cyan text-xs"></i>
+            <span data-i18n="hero.ctaSecondary">Get in Touch</span>
+          </a>
+
+          <button
+            id="btn-canvas-pulse"
+            type="button"
+            data-interactive="true"
+            class="w-full sm:w-auto px-4 py-4 rounded-2xl font-mono text-xs text-neon-cyan bg-neon-cyan/10 hover:bg-neon-cyan/20 border border-neon-cyan/30 transition-all flex items-center justify-center gap-2"
+            title="Trigger Interactive Particle Wave"
+          >
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span data-i18n="hero.pulseBtn">Warp Field</span>
+          </button>
+        </div>
+
+        <!-- Agency Key Metrics Bar -->
+        <div class="reveal-item pt-8 sm:pt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-left">
+          <div class="cyber-glass rounded-2xl p-4 sm:p-5 border border-white/10">
+            <p class="font-display font-bold text-2xl sm:text-3xl text-white">5+</p>
+            <p data-i18n="metrics.shipped" class="text-xs text-slate-400 mt-1">Ekosistem Web App Live</p>
+          </div>
+          <div class="cyber-glass rounded-2xl p-4 sm:p-5 border border-white/10">
+            <p class="font-display font-bold text-2xl sm:text-3xl text-neon-cyan">60 FPS</p>
+            <p data-i18n="metrics.fps" class="text-xs text-slate-400 mt-1">Animasi &amp; Interaksi Mulus</p>
+          </div>
+          <div class="cyber-glass rounded-2xl p-4 sm:p-5 border border-white/10">
+            <p class="font-display font-bold text-2xl sm:text-3xl text-white">99.9%</p>
+            <p data-i18n="metrics.uptime" class="text-xs text-slate-400 mt-1">Skor Performa &amp; Edge Deploy</p>
+          </div>
+          <div class="cyber-glass rounded-2xl p-4 sm:p-5 border border-white/10">
+            <p class="font-display font-bold text-2xl sm:text-3xl text-neon-blue">ID / EN</p>
+            <p data-i18n="metrics.reach" class="text-xs text-slate-400 mt-1">Standar Kolaborasi Global</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       C. ABOUT & CORE CAPABILITIES (LAYANAN ZASTECH.ID)
+       ========================================================================== -->
+  <section id="about" class="relative py-20 sm:py-28 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      
+      <!-- About Agency Split Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-6 space-y-5 reveal-item">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan font-mono text-xs uppercase tracking-widest">
+            <span>// 01</span>
+            <span data-i18n="about.tag">TENTANG ZASTECH.ID</span>
+          </div>
+
+          <h2
+            data-i18n="about.title"
+            class="font-display font-bold text-2xl sm:text-4xl lg:text-5xl text-white leading-tight"
+          >
+            Pelopor Rekayasa Web Interaktif, Integrasi AI, &amp; Produk Digital Modern.
+          </h2>
+
+          <p
+            data-i18n="about.desc1"
+            class="text-slate-300 text-sm sm:text-base leading-relaxed"
+          >
+            Berakar di Indonesia dengan visi semi-internasional, Zastech.id adalah studio teknologi kreatif yang menjembatani seni visual sekelas Awwwards dengan rekayasa perangkat lunak modern. Kami tidak sekadar membuat situs web; kami merancang ekosistem digital interaktif yang hidup, responsif, dan berkesan.
+          </p>
+
+          <p
+            data-i18n="about.desc2"
+            class="text-slate-400 text-sm sm:text-base leading-relaxed"
+          >
+            Mulai dari platform e-commerce interaktif, pusat hiburan &amp; streaming, klinik kesehatan mental virtual, hingga platform asesmen psikologi berbasis AI—setiap baris kode kami dioptimalkan untuk kecepatan, estetika, dan skalabilitas global.
+          </p>
+
+          <!-- Tech Stack Pills -->
+          <div class="pt-2 flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-xl bg-space-800 border border-white/10 font-mono text-xs text-neon-cyan">HTML5 / WebGL Canvas</span>
+            <span class="px-3 py-1.5 rounded-xl bg-space-800 border border-white/10 font-mono text-xs text-slate-300">Tailwind CSS Architecture</span>
+            <span class="px-3 py-1.5 rounded-xl bg-space-800 border border-white/10 font-mono text-xs text-slate-300">Vanilla JS &amp; React/Next.js</span>
+            <span class="px-3 py-1.5 rounded-xl bg-space-800 border border-white/10 font-mono text-xs text-neon-blue">Web Audio API</span>
+            <span class="px-3 py-1.5 rounded-xl bg-space-800 border border-white/10 font-mono text-xs text-purple-300">AI &amp; Edge Deployment</span>
+          </div>
+        </div>
+
+        <!-- Interactive Architecture Code / Telemetry Card -->
+        <div class="lg:col-span-6 reveal-item">
+          <div class="cyber-glass rounded-3xl p-5 sm:p-7 border border-white/15 relative overflow-hidden">
+            <div class="flex items-center justify-between pb-4 mb-5 border-b border-white/10">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                <span class="ml-2 font-mono text-xs text-slate-400">zastech_engine_v4.ts</span>
+              </div>
+              <span class="font-mono text-[11px] text-neon-cyan px-2.5 py-0.5 rounded-full bg-neon-cyan/10 border border-neon-cyan/25">
+                STATUS: OPTIMAL
+              </span>
+            </div>
+
+            <div class="font-mono text-xs sm:text-sm space-y-2.5 text-slate-300 overflow-x-auto no-scrollbar">
+              <p><span class="text-purple-400">const</span> <span class="text-neon-cyan">ZastechAgency</span> = {</p>
+              <p class="pl-4">origin: <span class="text-emerald-300">'Indonesia // Global Reach'</span>,</p>
+              <p class="pl-4">philosophy: <span class="text-amber-300">'Active Theory Inspired Craftsmanship'</span>,</p>
+              <p class="pl-4">corePillars: [</p>
+              <p class="pl-8 text-neon-blue">'Immersive WebGL &amp; Interactive Frontends',</p>
+              <p class="pl-8 text-neon-blue">'Zero-Latency SPA &amp; Local-First Caching',</p>
+              <p class="pl-8 text-neon-blue">'Human-Centric Neumorphic UI/UX'</p>
+              <p class="pl-4">],</p>
+              <p class="pl-4">deliverImpact: <span class="text-purple-400">async</span> (clientVision) =&gt; {</p>
+              <p class="pl-8"><span class="text-purple-400">return await</span> buildFutureExperience(clientVision);</p>
+              <p class="pl-4">}</p>
+              <p>};</p>
+            </div>
+
+            <!-- Interactive Live Performance Telemetry Bars -->
+            <div class="mt-6 pt-5 border-t border-white/10 grid grid-cols-3 gap-3 text-center">
+              <div class="p-3 rounded-2xl bg-space-950/70 border border-white/5">
+                <p class="text-[10px] font-mono text-slate-400 uppercase">Lighthouse</p>
+                <p class="font-display font-bold text-lg sm:text-xl text-emerald-400 mt-0.5">100 / 100</p>
+              </div>
+              <div class="p-3 rounded-2xl bg-space-950/70 border border-white/5">
+                <p class="text-[10px] font-mono text-slate-400 uppercase">First Paint</p>
+                <p class="font-display font-bold text-lg sm:text-xl text-neon-cyan mt-0.5">&lt; 0.4s</p>
+              </div>
+              <div class="p-3 rounded-2xl bg-space-950/70 border border-white/5">
+                <p class="text-[10px] font-mono text-slate-400 uppercase">UX Fidelity</p>
+                <p class="font-display font-bold text-lg sm:text-xl text-purple-400 mt-0.5">Awwwards+</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Capabilities / Services Section -->
+      <div id="services" class="pt-10 sm:pt-14 space-y-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 reveal-item">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-purple-500/15 border border-purple-500/30 text-purple-300 font-mono text-xs uppercase tracking-widest mb-3">
+              <span>// 02</span>
+              <span data-i18n="services.tag">KAPABILITAS UTAMA</span>
+            </div>
+            <h3
+              data-i18n="services.title"
+              class="font-display font-bold text-2xl sm:text-4xl text-white"
+            >
+              Arsitektur Layanan Digital Kelas Dunia
+            </h3>
+          </div>
+          <p
+            data-i18n="services.subtitle"
+            class="text-xs sm:text-sm text-slate-400 max-w-md"
+          >
+            Empat pilar spesialisasi teknis kami untuk mentransformasi ide kompleks menjadi produk web interaktif siap pakai.
+          </p>
+        </div>
+
+        <!-- 4 Interactive Glassmorphism Service Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+          
+          <!-- Service 1 -->
+          <article
+            data-interactive="true"
+            class="reveal-item cyber-glass cyber-glass-interactive rounded-3xl p-6 sm:p-8 flex flex-col justify-between group"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-neon-cyan/10 border border-neon-cyan/30 flex items-center justify-center text-neon-cyan text-xl sm:text-2xl group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-cube"></i>
+                </div>
+                <span class="font-mono text-xs text-slate-500 group-hover:text-neon-cyan transition-colors">01 // WEBGL &amp; CANVAS</span>
+              </div>
+              <h4 class="font-display font-bold text-xl sm:text-2xl text-white group-hover:text-neon-cyan transition-colors">
+                Interactive Web &amp; WebGL Development
+              </h4>
+              <p data-i18n="services.s1Desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Pengembangan website imersif berbasis HTML5 Canvas, shader interaktif, dan partikel 3D real-time yang merespons interaksi kursor serta sentuhan layar secara presisi.
+              </p>
+            </div>
+            <div class="pt-6 mt-6 border-t border-white/10 flex flex-wrap gap-2">
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-white/5 text-slate-300">HTML5 Canvas</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-white/5 text-slate-300">Three.js / WebGL</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-white/5 text-neon-cyan">Micro-Interactions</span>
+            </div>
+          </article>
+
+          <!-- Service 2 -->
+          <article
+            data-interactive="true"
+            class="reveal-item cyber-glass cyber-glass-interactive rounded-3xl p-6 sm:p-8 flex flex-col justify-between group"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-neon-blue/10 border border-neon-blue/30 flex items-center justify-center text-neon-blue text-xl sm:text-2xl group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-film"></i>
+                </div>
+                <span class="font-mono text-xs text-slate-500 group-hover:text-neon-blue transition-colors">02 // MEDIA &amp; ARCADE</span>
+              </div>
+              <h4 class="font-display font-bold text-xl sm:text-2xl text-white group-hover:text-neon-blue transition-colors">
+                Custom Streaming &amp; Entertainment Web App Architecture
+              </h4>
+              <p data-i18n="services.s2Desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Rancang bangun platform hiburan sinematik, katalog streaming berkecepatan tinggi, hingga pusat game arkade dengan Web Audio API sintetis dan sistem penyimpanan cache lokal.
+              </p>
+            </div>
+            <div class="pt-6 mt-6 border-t border-white/10 flex flex-wrap gap-2">
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-white/5 text-slate-300">Streaming UI</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-white/5 text-slate-300">Web Audio Synth</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-white/5 text-neon-blue">Local Cache Engine</span>
+            </div>
+          </article>
+
+          <!-- Service 3 -->
+          <article
+            data-interactive="true"
+            class="reveal-item cyber-glass cyber-glass-interactive rounded-3xl p-6 sm:p-8 flex flex-col justify-between group"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl sm:text-2xl group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <span class="font-mono text-xs text-slate-500 group-hover:text-purple-400 transition-colors">03 // RAPID PROTOTYPING</span>
+              </div>
+              <h4 class="font-display font-bold text-xl sm:text-2xl text-white group-hover:text-purple-400 transition-colors">
+                Digital Product &amp; Web App Prototyping
+              </h4>
+              <p data-i18n="services.s3Desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Pembuatan prototipe Single Page Application (SPA) fungsional yang siap diuji pasar—mulai dari pembaca e-book interaktif, klinik terapi digital, hingga generator sertifikat otomatis.
+              </p>
+            </div>
+            <div class="pt-6 mt-6 border-t border-white/10 flex flex-wrap gap-2">
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-white/5 text-slate-300">SPA Architecture</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-white/5 text-slate-300">Zero-Backend MVP</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-white/5 text-purple-300">Vercel Edge Ready</span>
+            </div>
+          </article>
+
+          <!-- Service 4 -->
+          <article
+            data-interactive="true"
+            class="reveal-item cyber-glass cyber-glass-interactive rounded-3xl p-6 sm:p-8 flex flex-col justify-between group"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl sm:text-2xl group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <span class="font-mono text-xs text-slate-500 group-hover:text-emerald-400 transition-colors">04 // DESIGN SYSTEMS</span>
+              </div>
+              <h4 class="font-display font-bold text-xl sm:text-2xl text-white group-hover:text-emerald-400 transition-colors">
+                Specialized UI/UX Design &amp; High-Performance Frontends
+              </h4>
+              <p data-i18n="services.s4Desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Sistem desain neumorfik &amp; glassmorphic yang adaptif di semua resolusi layar, memastikan ergonomi mobile (thumb-friendly) sekaligus kemewahan visual di layar monitor lebar.
+              </p>
+            </div>
+            <div class="pt-6 mt-6 border-t border-white/10 flex flex-wrap gap-2">
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-white/5 text-slate-300">Design Systems</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-white/5 text-slate-300">Mobile-First UX</span>
+              <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-white/5 text-emerald-300">WCAG Contrast</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       D. SELECTED WORKS / PORTOFOLIO SHOWCASE (3D TILT CARDS + LIVE VERCEL URLS)
+       ========================================================================== -->
+  <section id="works" class="relative py-20 sm:py-28 border-t border-white/10 bg-space-900/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
+      
+      <!-- Section Header & Category Filter Pills -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 reveal-item">
+        <div class="space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan font-mono text-xs uppercase tracking-widest">
+            <span>// 03</span>
+            <span data-i18n="works.tag">SELECTED WORKS &amp; SHOWCASE</span>
+          </div>
+          <h2
+            data-i18n="works.title"
+            class="font-display font-bold text-2xl sm:text-4xl lg:text-5xl text-white"
+          >
+            Karya Unggulan &amp; Ekosistem Live
+          </h2>
+          <p
+            data-i18n="works.subtitle"
+            class="text-xs sm:text-base text-slate-400 max-w-2xl"
+          >
+            Jelajahi 5 produk digital interaktif yang dirancang dan dikembangkan oleh Zastech.id. Klik tombol Live Demo untuk mencoba langsung aplikasi di tab baru.
+          </p>
+        </div>
+
+        <!-- Portfolio Filter Buttons -->
+        <div id="portfolio-filter-bar" class="flex items-center gap-2 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar shrink-0">
+          <button
+            type="button"
+            data-filter="all"
+            data-interactive="true"
+            class="work-filter-btn shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-neon-cyan text-space-950 shadow-md shadow-neon-cyan/25"
+          >
+            ALL WORKS (5)
+          </button>
+          <button
+            type="button"
+            data-filter="web-app"
+            data-interactive="true"
+            class="work-filter-btn shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-space-800 text-slate-300 hover:text-white border border-white/10"
+          >
+            WEB APPS &amp; E-COMMERCE
+          </button>
+          <button
+            type="button"
+            data-filter="entertainment"
+            data-interactive="true"
+            class="work-filter-btn shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-space-800 text-slate-300 hover:text-white border border-white/10"
+          >
+            ENTERTAINMENT &amp; GAMES
+          </button>
+          <button
+            type="button"
+            data-filter="wellness"
+            data-interactive="true"
+            class="work-filter-btn shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-space-800 text-slate-300 hover:text-white border border-white/10"
+          >
+            HEALTH &amp; PSYCHOLOGY
+          </button>
+        </div>
+      </div>
+
+      <!-- Portfolio Grid (Rendered dynamically via JS with 3D Tilt & Bilingual Content) -->
+      <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+        <!-- Populated by renderPortfolio() -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       E. INSIGHTS & INTERACTIVE PROJECT ESTIMATOR LAB (#insights)
+       ========================================================================== -->
+  <section id="insights" class="relative py-20 sm:py-28 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 reveal-item">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-neon-blue/10 border border-neon-blue/30 text-neon-blue font-mono text-xs uppercase tracking-widest mb-3">
+            <span>// 04</span>
+            <span data-i18n="insights.tag">INSIGHTS &amp; R&amp;D LAB</span>
+          </div>
+          <h2
+            data-i18n="insights.title"
+            class="font-display font-bold text-2xl sm:text-4xl text-white"
+          >
+            Eksperimen Teknis &amp; Wawasan Digital
+          </h2>
+        </div>
+        <p
+          data-i18n="insights.subtitle"
+          class="text-xs sm:text-sm text-slate-400 max-w-md"
+        >
+          Catatan riset arsitektur front-end modern dan simulator estimasi proyek interaktif untuk tim Anda.
+        </p>
+      </div>
+
+      <!-- 3 Insight Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+        
+        <article class="reveal-item cyber-glass cyber-glass-interactive rounded-3xl p-6 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs font-mono text-neon-cyan">
+              <span>R&amp;D PAPER // 01</span>
+              <span>5 MIN READ</span>
+            </div>
+            <h3 data-i18n="insights.i1Title" class="font-display font-bold text-lg sm:text-xl text-white">
+              Arsitektur Zero-Backend SPA: Mengoptimalkan LocalStorage &amp; State Engine
+            </h3>
+            <p data-i18n="insights.i1Desc" class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Bagaimana kami merancang BookVerse dan Zetflix agar mampu berjalan 100% instan di edge CDN dengan persistensi data pengguna yang tangguh.
+            </p>
+          </div>
+          <div class="pt-5 mt-5 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-300">
+            <span>By Zastech Core Team</span>
+            <a href="#works" class="text-neon-cyan hover:underline flex items-center gap-1">
+              <span data-i18n="insights.readMore">Lihat Implementasi</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="reveal-item cyber-glass cyber-glass-interactive rounded-3xl p-6 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs font-mono text-neon-blue">
+              <span>AUDIO LAB // 02</span>
+              <span>4 MIN READ</span>
+            </div>
+            <h3 data-i18n="insights.i2Title" class="font-display font-bold text-lg sm:text-xl text-white">
+              Sintesis Suara Real-Time di Browser Menggunakan Web Audio API
+            </h3>
+            <p data-i18n="insights.i2Desc" class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Studi kasus di balik ChillPlay Arcade: menghasilkan efek suara retro 8-bit dan frekuensi relaksasi MindEase tanpa memuat file MP3 eksternal.
+            </p>
+          </div>
+          <div class="pt-5 mt-5 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-300">
+            <span>By Creative Tech Lab</span>
+            <a href="#works" class="text-neon-blue hover:underline flex items-center gap-1">
+              <span data-i18n="insights.readMore">Lihat Implementasi</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="reveal-item cyber-glass cyber-glass-interactive rounded-3xl p-6 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs font-mono text-purple-400">
+              <span>UX PSYCHOLOGY // 03</span>
+              <span>6 MIN READ</span>
+            </div>
+            <h3 data-i18n="insights.i3Title" class="font-display font-bold text-lg sm:text-xl text-white">
+              Merancang Antarmuka Terapeutik &amp; Asesmen Psikologi Interaktif
+            </h3>
+            <p data-i18n="insights.i3Desc" class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Menggabungkan prinsip ergonomi kognitif dengan visual menenangkan pada MindEase serta algoritma skoring instan di MindQuest.
+            </p>
+          </div>
+          <div class="pt-5 mt-5 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-300">
+            <span>By Lead UI/UX Studio</span>
+            <a href="#works" class="text-purple-400 hover:underline flex items-center gap-1">
+              <span data-i18n="insights.readMore">Lihat Implementasi</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       F. INTERACTIVE CONTACT & FOOTNOTE (#contact)
+       ========================================================================== -->
+  <section id="contact" class="relative py-20 sm:py-28 border-t border-white/10 bg-space-900/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        
+        <!-- Left Column: Agency Contact Info & Direct Channels -->
+        <div class="lg:col-span-5 space-y-6 reveal-item">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan font-mono text-xs uppercase tracking-widest">
+            <span>// 05</span>
+            <span data-i18n="contact.tag">INITIATE COLLABORATION</span>
+          </div>
+
+          <h2
+            data-i18n="contact.title"
+            class="font-display font-bold text-2xl sm:text-4xl lg:text-5xl text-white leading-tight"
+          >
+            Siap Membangun Produk Digital Berstandar Masa Depan?
+          </h2>
+
+          <p
+            data-i18n="contact.subtitle"
+            class="text-xs sm:text-base text-slate-300 leading-relaxed"
+          >
+            Ceritakan visi proyek, kebutuhan prototipe aplikasi web, atau kolaborasi desain interaktif Anda. Tim Zastech.id akan merespons dalam waktu kurang dari 24 jam.
+          </p>
+
+          <!-- Direct Contact Cards -->
+          <div class="space-y-3.5 pt-2">
+            <!-- Email Card with Copy Button -->
+            <div class="cyber-glass rounded-2xl p-4 flex items-center justify-between gap-3 border border-white/10">
+              <div class="flex items-center gap-3.5 min-w-0">
+                <div class="w-11 h-11 rounded-xl bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan flex items-center justify-center shrink-0">
+                  <i class="fa-regular fa-envelope text-lg"></i>
+                </div>
+                <div class="min-w-0">
+                  <p data-i18n="contact.emailLabel" class="text-[11px] font-mono uppercase text-slate-400">Surel Resmi Agensi</p>
+                  <a href="mailto:zafrielakn3@gmail.com" class="font-mono font-bold text-sm sm:text-base text-white hover:text-neon-cyan truncate block">
+                    zafrielakn3@gmail.com
+                  </a>
+                </div>
+              </div>
+              <button
+                id="btn-copy-email"
+                type="button"
+                data-interactive="true"
+                class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-neon-cyan/20 border border-white/10 hover:border-neon-cyan/40 text-xs font-mono text-neon-cyan transition-all shrink-0"
+              >
+                <i class="fa-regular fa-copy mr-1"></i>
+                <span id="copy-email-text" data-i18n="contact.copyBtn">Salin</span>
+              </button>
+            </div>
+
+            <!-- Studio Location Card -->
+            <div class="cyber-glass rounded-2xl p-4 flex items-center gap-3.5 border border-white/10">
+              <div class="w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-earth-asia text-lg"></i>
+              </div>
+              <div>
+                <p data-i18n="contact.locationLabel" class="text-[11px] font-mono uppercase text-slate-400">Markas &amp; Operasional</p>
+                <p data-i18n="contact.locationValue" class="font-semibold text-sm sm:text-base text-white">
+                  Bandung &amp; Jakarta, Indonesia • Remote Worldwide
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Media Links -->
+          <div class="pt-2">
+            <p data-i18n="contact.socialLabel" class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">
+              Jejaring &amp; Repositori Kami
+            </p>
+            <div class="flex flex-wrap items-center gap-2.5">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-interactive="true"
+                class="px-4 py-2.5 rounded-xl cyber-glass hover:border-neon-cyan/50 text-xs font-mono text-slate-200 hover:text-neon-cyan flex items-center gap-2 transition-all"
+              >
+                <i class="fa-brands fa-github text-sm"></i>
+                <span>GitHub</span>
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-interactive="true"
+                class="px-4 py-2.5 rounded-xl cyber-glass hover:border-neon-cyan/50 text-xs font-mono text-slate-200 hover:text-neon-cyan flex items-center gap-2 transition-all"
+              >
+                <i class="fa-brands fa-linkedin-in text-sm"></i>
+                <span>LinkedIn</span>
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-interactive="true"
+                class="px-4 py-2.5 rounded-xl cyber-glass hover:border-neon-cyan/50 text-xs font-mono text-slate-200 hover:text-neon-cyan flex items-center gap-2 transition-all"
+              >
+                <i class="fa-brands fa-instagram text-sm"></i>
+                <span>Instagram</span>
+              </a>
+              <a
+                href="https://dribbble.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-interactive="true"
+                class="px-4 py-2.5 rounded-xl cyber-glass hover:border-neon-cyan/50 text-xs font-mono text-slate-200 hover:text-neon-cyan flex items-center gap-2 transition-all"
+              >
+                <i class="fa-brands fa-dribbble text-sm"></i>
+                <span>Dribbble</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Contact Form with Real-Time Validation -->
+        <div class="lg:col-span-7 reveal-item">
+          <div class="cyber-glass rounded-3xl p-6 sm:p-8 lg:p-10 border border-white/15">
+            <h3
+              data-i18n="contact.formTitle"
+              class="font-display font-bold text-xl sm:text-2xl text-white mb-1"
+            >
+              Kirim Brief Proyek Anda
+            </h3>
+            <p
+              data-i18n="contact.formSubtitle"
+              class="text-xs sm:text-sm text-slate-400 mb-6"
+            >
+              Pilih kategori layanan dan lengkapi formulir interaktif di bawah ini.
+            </p>
+
+            <form id="contact-form" novalidate class="space-y-5">
+              
+              <!-- Interactive Service Category Selector Pills -->
+              <div>
+                <label data-i18n="contact.serviceSelectLabel" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2.5">
+                  Layanan yang Dibutuhkan
+                </label>
+                <div id="service-selector-pills" class="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    data-service-pill="Interactive Web / WebGL"
+                    class="service-pill px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-neon-cyan/15 text-neon-cyan border border-neon-cyan/50 transition-all"
+                  >
+                    Interactive Web / WebGL
+                  </button>
+                  <button
+                    type="button"
+                    data-service-pill="Streaming & Game Hub"
+                    class="service-pill px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-space-950/80 text-slate-400 border border-white/10 hover:text-white transition-all"
+                  >
+                    Streaming &amp; Game Hub
+                  </button>
+                  <button
+                    type="button"
+                    data-service-pill="Web App Prototyping"
+                    class="service-pill px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-space-950/80 text-slate-400 border border-white/10 hover:text-white transition-all"
+                  >
+                    Web App Prototyping
+                  </button>
+                  <button
+                    type="button"
+                    data-service-pill="UI/UX Design System"
+                    class="service-pill px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-space-950/80 text-slate-400 border border-white/10 hover:text-white transition-all"
+                  >
+                    UI/UX Design System
+                  </button>
+                </div>
+              </div>
+
+              <!-- Name & Email Grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="contact-name" data-i18n="contact.nameLabel" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                    Nama Lengkap *
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    required
+                    placeholder="Alex Pratama"
+                    class="w-full px-4 py-3 rounded-xl bg-space-950/90 border border-white/10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/20 transition-all"
+                  />
+                  <p id="error-name" data-i18n="contact.errorName" class="hidden text-[11px] text-rose-400 mt-1 font-medium">
+                    Mohon masukkan nama Anda (minimal 2 karakter).
+                  </p>
+                </div>
+
+                <div>
+                  <label for="contact-email" data-i18n="contact.emailInputLabel" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                    Alamat Email *
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    required
+                    placeholder="alex@company.com"
+                    class="w-full px-4 py-3 rounded-xl bg-space-950/90 border border-white/10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/20 transition-all"
+                  />
+                  <p id="error-email" data-i18n="contact.errorEmail" class="hidden text-[11px] text-rose-400 mt-1 font-medium">
+                    Mohon masukkan format alamat email yang valid.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Project Message -->
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <label for="contact-message" data-i18n="contact.messageLabel" class="block text-xs font-semibold text-slate-300">
+                    Detail Proyek / Pesan *
+                  </label>
+                  <button
+                    id="btn-fill-demo-brief"
+                    type="button"
+                    data-interactive="true"
+                    data-i18n="contact.fillSample"
+                    class="text-[11px] font-mono text-neon-cyan hover:underline"
+                  >
+                    + Isi Contoh Brief
+                  </button>
+                </div>
+                <textarea
+                  id="contact-message"
+                  rows="4"
+                  required
+                  placeholder="Ceritakan tujuan produk, fitur interaktif yang diinginkan, serta target waktu rilis..."
+                  class="w-full px-4 py-3 rounded-xl bg-space-950/90 border border-white/10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan/20 transition-all"
+                ></textarea>
+                <p id="error-message" data-i18n="contact.errorMessage" class="hidden text-[11px] text-rose-400 mt-1 font-medium">
+                  Mohon tuliskan pesan atau deskripsi proyek minimal 10 karakter.
+                </p>
+              </div>
+
+              <!-- Submit Button & Status Feedback -->
+              <div class="pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <p data-i18n="contact.privacyNote" class="text-[11px] text-slate-400">
+                  <i class="fa-solid fa-shield-halved text-neon-cyan mr-1"></i>
+                  Data Anda terenkripsi &amp; dijaga kerahasiaannya (NDA Ready).
+                </p>
+
+                <button
+                  type="submit"
+                  data-interactive="true"
+                  class="w-full sm:w-auto px-7 py-3.5 rounded-xl font-display font-bold text-sm text-space-950 btn-neon-primary flex items-center justify-center gap-2"
+                >
+                  <span data-i18n="contact.submitBtn">Kirim Pesan Sekarang</span>
+                  <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+              </div>
+
+              <!-- Success Banner after submission -->
+              <div
+                id="contact-success-box"
+                class="hidden p-4 rounded-2xl bg-emerald-500/15 border border-emerald-400/40 text-emerald-200 text-xs sm:text-sm flex items-start gap-3"
+              >
+                <i class="fa-solid fa-circle-check text-emerald-400 text-lg mt-0.5"></i>
+                <div class="flex-1">
+                  <p data-i18n="contact.successTitle" class="font-bold text-white">Transmisi Brief Berhasil Diterima!</p>
+                  <p id="contact-success-detail" class="text-xs text-emerald-200 mt-0.5">
+                    Terima kasih. Tim Zastech.id akan segera menghubungi Anda.
+                  </p>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="border-t border-white/10 bg-space-950 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+      <div class="flex items-center gap-2.5">
+        <span class="font-display font-bold text-white tracking-wider">ZASTECH<span class="text-neon-cyan">.ID</span></span>
+        <span>—</span>
+        <span data-i18n="footer.tagline">Semi-International Interactive Digital Agency</span>
+      </div>
+
+      <p class="font-mono text-slate-400 text-center sm:text-right">
+        &copy; 2026 Zastech.id - All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODAL DETAIL ARSITEKTUR PROYEK (CASE STUDY QUICK VIEW)
+       ========================================================================== -->
+  <div
+    id="modal-project-detail"
+    class="fixed inset-0 z-50 hidden bg-space-950/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="cyber-glass rounded-t-3xl sm:rounded-3xl max-w-xl w-full p-6 sm:p-8 border border-neon-cyan/30 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-start justify-between gap-3 pb-4 border-b border-white/10">
+        <div>
+          <span id="modal-proj-tag" class="font-mono text-[11px] uppercase tracking-widest text-neon-cyan">TAG</span>
+          <h3 id="modal-proj-title" class="font-display font-bold text-xl sm:text-2xl text-white mt-1">Project Title</h3>
+        </div>
+        <button
+          id="btn-close-proj-modal"
+          type="button"
+          class="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/15 text-slate-300 flex items-center justify-center shrink-0"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <p id="modal-proj-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed"></p>
+
+      <div>
+        <p class="text-[11px] font-mono uppercase tracking-wider text-slate-400 mb-2">Tech Stack &amp; Architecture Highlights</p>
+        <div id="modal-proj-stack" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-end gap-3">
+        <button
+          id="btn-modal-close-secondary"
+          type="button"
+          class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-slate-300"
+          data-i18n="works.closeModal"
+        >
+          Tutup
+        </button>
+        <a
+          id="modal-proj-link"
+          href="https://book18githubio.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:w-auto px-6 py-2.5 rounded-xl text-xs font-display font-bold text-space-950 btn-neon-primary flex items-center justify-center gap-2"
+        >
+          <span data-i18n="works.liveDemo">Live Demo / Visit Project</span>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-5 right-4 left-4 sm:left-auto z-50 flex flex-col items-center sm:items-end gap-2 pointer-events-none"></div>
+
+  <!-- ==========================================================================
+       VANILLA JAVASCRIPT: BILINGUAL DICTIONARY, PORTFOLIO DATA, CANVAS & UX
+       ========================================================================== -->
+  <script>
+    /**
+     * ZASTECH.ID — INTERACTIVE DIGITAL AGENCY ENGINE
+     * 1. Dual Language Dictionary (ID | EN)
+     * 2. Selected Works Data (5 Real Vercel Projects + 3D Tilt + Case Study Modal)
+     * 3. Interactive HTML5 Canvas Particle Network (Mouse-Follow & Shockwave)
+     * 4. Custom Cursor Lerp Engine & Scroll-Triggered Reveal Animations
+     */
+
+    // --------------------------------------------------------------------------
+    // 1. DUAL LANGUAGE DICTIONARY (BAHASA INDONESIA & ENGLISH)
+    // --------------------------------------------------------------------------
+    const I18N_DICTIONARY = {
+      id: {
+        'nav.about': 'Tentang Kami',
+        'nav.services': 'Layanan',
+        'nav.works': 'Karya Pilihan',
+        'nav.insights': 'Wawasan & Lab',
+        'nav.contact': 'Kontak',
+        'nav.cta': 'Mulai Proyek',
+        'hero.badge': 'SEMI-INTERNATIONAL INTERACTIVE DIGITAL AGENCY',
+        'hero.headline': 'Membangun Pengalaman Digital Masa Depan yang Imersif & Berdampak.',
+        'hero.subheadline': 'Zastech.id memadukan rekayasa kreatif WebGL, arsitektur aplikasi web berkinerja tinggi, dan desain UI/UX futuristik untuk menciptakan produk digital berstandar global.',
+        'hero.ctaPrimary': 'Explore Our Works',
+        'hero.ctaSecondary': 'Get in Touch',
+        'hero.pulseBtn': 'Gelombang Partikel',
+        'metrics.shipped': 'Ekosistem Web App Live',
+        'metrics.fps': 'Animasi & Interaksi Mulus',
+        'metrics.uptime': 'Skor Performa & Edge Deploy',
+        'metrics.reach': 'Standar Kolaborasi Global',
+        'about.tag': 'TENTANG ZASTECH.ID',
+        'about.title': 'Pelopor Rekayasa Web Interaktif, Integrasi AI, & Produk Digital Modern.',
+        'about.desc1': 'Berakar di Indonesia dengan visi semi-internasional, Zastech.id adalah studio teknologi kreatif yang menjembatani seni visual sekelas Awwwards dengan rekayasa perangkat lunak modern. Kami tidak sekadar membuat situs web; kami merancang ekosistem digital interaktif yang hidup, responsif, dan berkesan.',
+        'about.desc2': 'Mulai dari platform e-commerce interaktif, pusat hiburan & streaming, klinik kesehatan mental virtual, hingga platform asesmen psikologi berbasis AI—setiap baris kode kami dioptimalkan untuk kecepatan, estetika, dan skalabilitas global.',
+        'services.tag': 'KAPABILITAS UTAMA',
+        'services.title': 'Arsitektur Layanan Digital Kelas Dunia',
+        'services.subtitle': 'Empat pilar spesialisasi teknis kami untuk mentransformasi ide kompleks menjadi produk web interaktif siap pakai.',
+        'services.s1Desc': 'Pengembangan website imersif berbasis HTML5 Canvas, shader interaktif, dan partikel 3D real-time yang merespons interaksi kursor serta sentuhan layar secara presisi.',
+        'services.s2Desc': 'Rancang bangun platform hiburan sinematik, katalog streaming berkecepatan tinggi, hingga pusat game arkade dengan Web Audio API sintetis dan sistem penyimpanan cache lokal.',
+        'services.s3Desc': 'Pembuatan prototipe Single Page Application (SPA) fungsional yang siap diuji pasar—mulai dari pembaca e-book interaktif, klinik terapi digital, hingga generator sertifikat otomatis.',
+        'services.s4Desc': 'Sistem desain neumorfik & glassmorphic yang adaptif di semua resolusi layar, memastikan ergonomi mobile (thumb-friendly) sekaligus kemewahan visual di layar monitor lebar.',
+        'works.tag': 'SELECTED WORKS & SHOWCASE',
+        'works.title': 'Karya Unggulan & Ekosistem Live',
+        'works.subtitle': 'Jelajahi 5 produk digital interaktif yang dirancang dan dikembangkan oleh Zastech.id. Klik tombol Live Demo untuk mencoba langsung aplikasi di tab baru.',
+        'works.liveDemo': 'Live Demo / Visit Project',
+        'works.specsBtn': 'Detail Teknis',
+        'works.closeModal': 'Tutup',
+        'insights.tag': 'WAWASAN & R&D LAB',
+        'insights.title': 'Eksperimen Teknis & Wawasan Digital',
+        'insights.subtitle': 'Catatan riset arsitektur front-end modern dan studi kasus rekayasa antarmuka interaktif dari tim kami.',
+        'insights.i1Title': 'Arsitektur Zero-Backend SPA: Mengoptimalkan LocalStorage & State Engine',
+        'insights.i1Desc': 'Bagaimana kami merancang BookVerse dan Zetflix agar mampu berjalan 100% instan di edge CDN dengan persistensi data pengguna yang tangguh.',
+        'insights.i2Title': 'Sintesis Suara Real-Time di Browser Menggunakan Web Audio API',
+        'insights.i2Desc': 'Studi kasus di balik ChillPlay Arcade: menghasilkan efek suara retro 8-bit dan frekuensi relaksasi MindEase tanpa memuat file MP3 eksternal.',
+        'insights.i3Title': 'Merancang Antarmuka Terapeutik & Asesmen Psikologi Interaktif',
+        'insights.i3Desc': 'Menggabungkan prinsip ergonomi kognitif dengan visual menenangkan pada MindEase serta algoritma skoring instan di MindQuest.',
+        'insights.readMore': 'Lihat Implementasi',
+        'contact.tag': 'MULAI KOLABORASI',
+        'contact.title': 'Siap Membangun Produk Digital Berstandar Masa Depan?',
+        'contact.subtitle': 'Ceritakan visi proyek, kebutuhan prototipe aplikasi web, atau kolaborasi desain interaktif Anda. Tim Zastech.id akan merespons dalam waktu kurang dari 24 jam.',
+        'contact.emailLabel': 'Surel Resmi Agensi',
+        'contact.copyBtn': 'Salin',
+        'contact.locationLabel': 'Markas & Operasional',
+        'contact.locationValue': 'Bandung & Jakarta, Indonesia • Remote Worldwide',
+        'contact.socialLabel': 'Jejaring & Repositori Kami',
+        'contact.formTitle': 'Kirim Brief Proyek Anda',
+        'contact.formSubtitle': 'Pilih kategori layanan dan lengkapi formulir interaktif di bawah ini.',
+        'contact.serviceSelectLabel': 'Layanan yang Dibutuhkan',
+        'contact.nameLabel': 'Nama Lengkap *',
+        'contact.emailInputLabel': 'Alamat Email *',
+        'contact.messageLabel': 'Detail Proyek / Pesan *',
+        'contact.fillSample': '+ Isi Contoh Brief',
+        'contact.errorName': 'Mohon masukkan nama Anda (minimal 2 karakter).',
+        'contact.errorEmail': 'Mohon masukkan format alamat email yang valid.',
+        'contact.errorMessage': 'Mohon tuliskan pesan atau deskripsi proyek minimal 10 karakter.',
+        'contact.privacyNote': 'Data Anda terenkripsi & dijaga kerahasiaannya (NDA Ready).',
+        'contact.submitBtn': 'Kirim Pesan Sekarang',
+        'contact.successTitle': 'Transmisi Brief Berhasil Diterima!',
+        'footer.tagline': 'Semi-International Interactive Digital Agency'
+      },
+      en: {
+        'nav.about': 'About',
+        'nav.services': 'Services',
+        'nav.works': 'Selected Works',
+        'nav.insights': 'Insights',
+        'nav.contact': 'Contact',
+        'nav.cta': 'Start a Project',
+        'hero.badge': 'SEMI-INTERNATIONAL INTERACTIVE DIGITAL AGENCY',
+        'hero.headline': 'Crafting Next-Gen Immersive & High-Impact Digital Experiences.',
+        'hero.subheadline': 'Zastech.id fuses creative WebGL engineering, high-performance web app architecture, and futuristic UI/UX design to build world-class digital products.',
+        'hero.ctaPrimary': 'Explore Our Works',
+        'hero.ctaSecondary': 'Get in Touch',
+        'hero.pulseBtn': 'Warp Field',
+        'metrics.shipped': 'Live Web App Ecosystems',
+        'metrics.fps': 'Fluid 60fps Micro-Interactions',
+        'metrics.uptime': 'Performance & Edge Deployment',
+        'metrics.reach': 'Bilingual Global Collaboration',
+        'about.tag': 'ABOUT ZASTECH.ID',
+        'about.title': 'Pioneering Interactive Web Engineering, AI Integration, & Modern Digital Products.',
+        'about.desc1': 'Rooted in Indonesia with a semi-international outlook, Zastech.id is a creative technology studio bridging Awwwards-grade visual artistry with modern software engineering. We do not just build websites; we engineer living, responsive digital ecosystems.',
+        'about.desc2': 'From interactive e-book marketplaces, cinematic streaming hubs, and virtual mental health clinics to AI-assisted psychological testing platforms—every line of code is crafted for speed, aesthetics, and global scalability.',
+        'services.tag': 'CORE CAPABILITIES',
+        'services.title': 'World-Class Digital Service Architecture',
+        'services.subtitle': 'Our four specialized technical pillars designed to transform ambitious concepts into production-ready interactive web products.',
+        'services.s1Desc': 'Immersive web experiences powered by HTML5 Canvas, custom shaders, and real-time 3D particle systems that respond fluidly to cursor and touch inputs.',
+        'services.s2Desc': ' End-to-end engineering for cinematic streaming platforms, dynamic media catalogs, and retro arcade hubs with synthesized Web Audio API and local caching.',
+        'services.s3Desc': 'Rapid, full-featured Single Page Application (SPA) prototyping ready for market validation—spanning e-book readers, digital therapy spaces, and automated certificate engines.',
+        'services.s4Desc': 'Neumorphic and glassmorphic design systems engineered for every viewport, ensuring thumb-friendly mobile ergonomics alongside widescreen desktop elegance.',
+        'works.tag': 'SELECTED WORKS & SHOWCASE',
+        'works.title': 'Featured Works & Live Ecosystems',
+        'works.subtitle': 'Explore 5 live interactive digital products designed and engineered by Zastech.id. Click Live Demo to launch each project in a new tab.',
+        'works.liveDemo': 'Live Demo / Visit Project',
+        'works.specsBtn': 'Tech Specs',
+        'works.closeModal': 'Close',
+        'insights.tag': 'INSIGHTS & R&D LAB',
+        'insights.title': 'Technical Experiments & Digital Insights',
+        'insights.subtitle': 'Research notes on modern front-end architecture and interactive engineering case studies from our studio.',
+        'insights.i1Title': 'Zero-Backend SPA Architecture: Mastering LocalStorage & State Engines',
+        'insights.i1Desc': 'How we engineered BookVerse and Zetflix to run with zero server latency on edge CDNs while preserving resilient client-side state.',
+        'insights.i2Title': 'Real-Time Browser Sound Synthesis with the Web Audio API',
+        'insights.i2Desc': 'Behind ChillPlay Arcade: generating 8-bit retro sound effects and MindEase therapeutic ambient frequencies without external audio files.',
+        'insights.i3Title': 'Designing Therapeutic Interfaces & Interactive Psychological Assessments',
+        'insights.i3Desc': 'Combining cognitive ergonomics with calming visual feedback in MindEase and real-time psychometric scoring in MindQuest.',
+        'insights.readMore': 'View Implementation',
+        'contact.tag': 'INITIATE COLLABORATION',
+        'contact.title': 'Ready to Build Next-Gen Digital Products?',
+        'contact.subtitle': 'Share your project vision, web app prototype requirements, or interactive design goals. Our team responds within 24 hours.',
+        'contact.emailLabel': 'Official Agency Email',
+        'contact.copyBtn': 'Copy',
+        'contact.locationLabel': 'Studio & Operations',
+        'contact.locationValue': 'Bandung & Jakarta, Indonesia • Remote Worldwide',
+        'contact.socialLabel': 'Our Networks & Repositories',
+        'contact.formTitle': 'Send Your Project Brief',
+        'contact.formSubtitle': 'Select a capability and complete the interactive brief below.',
+        'contact.serviceSelectLabel': 'Required Capability',
+        'contact.nameLabel': 'Full Name *',
+        'contact.emailInputLabel': 'Email Address *',
+        'contact.messageLabel': 'Project Details / Message *',
+        'contact.fillSample': '+ Fill Sample Brief',
+        'contact.errorName': 'Please enter your full name (at least 2 characters).',
+        'contact.errorEmail': 'Please enter a valid email address.',
+        'contact.errorMessage': 'Please provide project details (at least 10 characters).',
+        'contact.privacyNote': 'Your brief is encrypted & strictly confidential (NDA Ready).',
+        'contact.submitBtn': 'Transmit Message Now',
+        'contact.successTitle': 'Project Brief Transmitted Successfully!',
+        'footer.tagline': 'Semi-International Interactive Digital Agency'
+      }
+    };
+
+    // --------------------------------------------------------------------------
+    // 2. SELECTED WORKS / PORTFOLIO DATA (5 REAL VERCEL DEPLOYMENTS)
+    // --------------------------------------------------------------------------
+    const PORTFOLIO_PROJECTS = [
+      {
+        id: 'bookverse',
+        number: '01',
+        title: 'Prototyping Platform E-Book Interactive (BookVerse)',
+        shortName: 'BookVerse',
+        url: 'https://book18githubio.vercel.app/',
+        tag: 'Interactive Web / E-Commerce',
+        category: 'web-app',
+        accentColor: '#00F2FE',
+        gradient: 'from-indigo-600 via-cyan-500 to-slate-900',
+        icon: 'fa-book-open-reader',
+        descId: 'Platform toko & pembaca e-book interaktif dengan mode baca yang nyaman.',
+        descEn: 'Interactive e-book marketplace & reader platform with customizable reading modes.',
+        detailId: 'BookVerse menggabungkan pengalaman katalog toko buku digital modern dengan Interactive E-Book Reader berfitur lengkap (pengatur ukuran huruf dinamis, mode Light/Sepia/Dark, penanda halaman otomatis, serta fitur unggah naskah mandiri berbasis localStorage).',
+        detailEn: 'BookVerse unifies a modern digital bookstore catalog with a full-featured Interactive E-Book Reader supporting dynamic typography scaling, Light/Sepia/Dark eye-care themes, persistent bookmarks, and custom manuscript uploads via localStorage.',
+        stack: ['HTML5 SPA', 'Tailwind CSS', 'Interactive Reader Engine', 'LocalStorage Sync']
+      },
+      {
+        id: 'chillplay',
+        number: '02',
+        title: 'Gamified Arcade & Entertainment Hub (ChillPlay)',
+        shortName: 'ChillPlay',
+        url: 'https://gamzriel18githubio.vercel.app/',
+        tag: 'Web Games / Web Audio API',
+        category: 'entertainment',
+        accentColor: '#A855F7',
+        gradient: 'from-fuchsia-600 via-purple-600 to-indigo-950',
+        icon: 'fa-gamepad',
+        descId: 'Pusat game retro solo interaktif dengan audio sintetis & sistem statistik tersimpan.',
+        descEn: 'Interactive solo retro gaming hub with synthetic Web Audio API & cached progress.',
+        detailId: 'ChillPlay menghadirkan pengalaman arkade retro langsung di browser dengan game loop 60fps yang responsif, efek suara sintetis real-time menggunakan Web Audio API tanpa aset audio eksternal, serta papan skor dan statistik pemain yang tersimpan otomatis.',
+        detailEn: 'ChillPlay delivers a 60fps retro arcade gaming hub directly in the browser, featuring real-time synthesized sound effects powered by the Web Audio API and persistent player high-score telemetry.',
+        stack: ['HTML5 Canvas 2D', 'Web Audio API Synth', '60FPS Game Loop', 'Cached Telemetry']
+      },
+      {
+        id: 'zetflix',
+        number: '03',
+        title: 'Static Streaming Entertainment Platform (Zetflix)',
+        shortName: 'Zetflix',
+        url: 'https://linkoai-github-io-9u5s.vercel.app/',
+        tag: 'Streaming Hub / Static UI',
+        category: 'entertainment',
+        accentColor: '#F43F5E',
+        gradient: 'from-rose-600 via-red-700 to-slate-950',
+        icon: 'fa-Clapperboard',
+        descId: 'Platform streaming hiburan statis bernuansa sinematik dengan navigasi menu dinamis dan sistem cache lokal.',
+        descEn: 'Cinematic static entertainment streaming platform featuring dynamic menu navigation and local cache system.',
+        detailId: 'Zetflix dirancang dengan estetika sinematik gelap ala platform OTT kelas atas, dilengkapi filter genre instan, pencarian real-time, daftar tontonan pribadi (Watchlist) berbasis cache lokal, dan pratinjau konten interaktif tanpa waktu muat.',
+        detailEn: 'Zetflix is engineered with a dark cinematic OTT aesthetic, featuring instant genre filtering, real-time search, a local-cached personal Watchlist, and zero-latency interactive media previews.',
+        stack: ['Cinematic OTT UI', 'Dynamic SPA Router', 'Watchlist Local Cache', 'Responsive Grid']
+      },
+      {
+        id: 'mindease',
+        number: '04',
+        title: 'Virtual Mental Health & Therapy Space (MindEase / Take a Breath)',
+        shortName: 'MindEase',
+        url: 'https://takeabreathmindeasegithubio.vercel.app/',
+        tag: 'Healthcare / Digital Clinic',
+        category: 'wellness',
+        accentColor: '#34D399',
+        gradient: 'from-emerald-500 via-teal-600 to-slate-900',
+        icon: 'fa-spa',
+        descId: 'Platform ruang konsultasi kesehatan mental & latihan pernapasan terapeutik.',
+        descEn: 'Therapeutic mental health consultation platform with interactive guided breathing.',
+        detailId: 'MindEase (Take a Breath) menyediakan ruang tenang digital untuk kesehatan mental, menampilkan visualizer latihan pernapasan terpandu (Guided Breathing Visualizer), pelacak suasana hati harian, serta direktori sesi konsultasi yang menenangkan mata.',
+        detailEn: 'MindEase (Take a Breath) provides a calming digital sanctuary featuring an interactive Guided Breathing Visualizer, daily mood journaling, and a human-centric mental wellness consultation interface.',
+        stack: ['Breathing Visualizer', 'Therapeutic UI/UX', 'Mood Tracker Engine', 'Accessible Design']
+      },
+      {
+        id: 'mindquest',
+        number: '05',
+        title: 'Interactive Psychological & Skill Testing Platform (MindQuest)',
+        shortName: 'MindQuest',
+        url: 'https://testuhuygithubio.vercel.app/',
+        tag: 'Interactive Testing / Web App',
+        category: 'wellness',
+        accentColor: '#38BDF8',
+        gradient: 'from-sky-500 via-blue-600 to-indigo-950',
+        icon: 'fa-brain',
+        descId: 'Platform tes psikologi, MBTI, dan minat bakat interaktif lengkap dengan generator sertifikat digital otomatis.',
+        descEn: 'Interactive psychology, MBTI, and aptitude testing platform complete with automated digital certificate generator.',
+        detailId: 'MindQuest menghadirkan sistem asesmen psikologi, kepribadian MBTI, dan pemetaan minat bakat multi-tahap dengan kalkulasi skor instan serta fitur pembuatan sertifikat digital otomatis yang dapat langsung diunduh oleh pengguna.',
+        detailEn: 'MindQuest powers multi-stage psychological, MBTI personality, and aptitude assessments with real-time psychometric scoring and an automated Canvas-based digital certificate generator.',
+        stack: ['Psychometric Engine', 'MBTI & Aptitude Logic', 'Auto Certificate Generator', 'Interactive Charts']
+      }
+    ];
+
+    // --------------------------------------------------------------------------
+    // 3. APPLICATION STATE
+    // --------------------------------------------------------------------------
+    let currentLang = 'id';
+    let currentPortfolioFilter = 'all';
+    let selectedServicePill = 'Interactive Web / WebGL';
+
+    // Load saved language preference safely
+    try {
+      const savedLang = localStorage.getItem('zastech_lang_pref');
+      if (savedLang === 'en' || savedLang === 'id') {
+        currentLang = savedLang;
+      }
+    } catch (e) {}
+
+    // --------------------------------------------------------------------------
+    // 4. DUAL LANGUAGE SWITCHER ENGINE (INSTANT DOM UPDATE)
+    // --------------------------------------------------------------------------
+    function setLanguage(lang) {
+      if (lang !== 'id' && lang !== 'en') return;
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      try {
+        localStorage.setItem('zastech_lang_pref', lang);
+      } catch (e) {}
+
+      // Update toggle button styles
+      const btnId = document.getElementById('btn-lang-id');
+      const btnEn = document.getElementById('btn-lang-en');
+      const activeCls = 'px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all bg-gradient-to-r from-neon-cyan to-neon-blue text-space-950 shadow-sm';
+      const inactiveCls = 'px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all text-slate-400 hover:text-white';
+
+      if (btnId && btnEn) {
+        btnId.className = lang === 'id' ? activeCls : inactiveCls;
+        btnEn.className = lang === 'en' ? activeCls : inactiveCls;
+      }
+
+      // Update all static elements with data-i18n
+      const dict = I18N_DICTIONARY[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict && dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+
+      // Update form placeholders dynamically
+      const msgInput = document.getElementById('contact-message');
+      if (msgInput) {
+        msgInput.placeholder = lang === 'id'
+          ? 'Ceritakan tujuan produk, fitur interaktif yang diinginkan, serta target waktu rilis...'
+          : 'Describe your product goals, desired interactive features, and target launch timeline...';
+      }
+
+      // Re-render Portfolio cards in the active language
+      renderPortfolio();
+    }
+
+    // --------------------------------------------------------------------------
+    // 5. RENDER SELECTED WORKS / PORTFOLIO SHOWCASE + 3D TILT EFFECT
+    // --------------------------------------------------------------------------
+    function renderPortfolio() {
+      const grid = document.getElementById('portfolio-grid');
+      if (!grid) return;
+
+      const filtered = PORTFOLIO_PROJECTS.filter(item => {
+        if (currentPortfolioFilter === 'all') return true;
+        return item.category === currentPortfolioFilter;
+      });
+
+      const liveDemoLabel = I18N_DICTIONARY[currentLang]['works.liveDemo'];
+      const specsLabel = I18N_DICTIONARY[currentLang]['works.specsBtn'];
+
+      grid.innerHTML = filtered.map(proj => {
+        const desc = currentLang === 'id' ? proj.descId : proj.descEn;
+        const iconCls = proj.icon === 'fa-Clapperboard' ? 'fa-clapperboard' : proj.icon;
+
+        return `
+          <article
+            data-project-card="${proj.id}"
+            class="tilt-card cyber-glass rounded-3xl border border-white/10 overflow-hidden flex flex-col justify-between group hover:border-neon-cyan/50"
+          >
+            <div>
+              <!-- Aesthetic Project Preview Header -->
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-gradient-to-br ${proj.gradient} p-5 flex flex-col justify-between">
+                <!-- Decorative Grid & Glow inside Preview -->
+                <div class="absolute inset-0 bg-cyber-grid opacity-35 pointer-events-none"></div>
+                <div
+                  class="absolute -bottom-10 -right-10 w-36 h-36 rounded-full blur-2xl opacity-50 pointer-events-none group-hover:scale-125 transition-transform duration-500"
+                  style="background-color: ${proj.accentColor}"
+                ></div>
+
+                <!-- Top Row: Project Number & Category Tag -->
+                <div class="relative z-10 flex items-center justify-between gap-2">
+                  <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-space-950/75 text-white border border-white/15 backdrop-blur-md">
+                    // ${proj.number}
+                  </span>
+                  <span class="font-mono text-[11px] font-semibold px-3 py-1 rounded-full bg-space-950/80 text-neon-cyan border border-neon-cyan/30 backdrop-blur-md truncate">
+                    ${proj.tag}
+                  </span>
+                </div>
+
+                <!-- Center Mockup Window Graphic -->
+                <div class="relative z-10 my-auto flex items-center justify-between gap-4 bg-space-950/65 backdrop-blur-md rounded-2xl p-3.5 border border-white/15 shadow-xl group-hover:translate-y-[-3px] transition-transform">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <div
+                      class="w-11 h-11 rounded-xl flex items-center justify-center text-white text-lg shrink-0 shadow-md"
+                      style="background: linear-gradient(135deg, ${proj.accentColor}, #4FACFE)"
+                    >
+                      <i class="fa-solid ${iconCls}"></i>
+                    </div>
+                    <div class="min-w-0">
+                      <p class="font-display font-bold text-sm sm:text-base text-white truncate">${proj.shortName}</p>
+                      <p class="font-mono text-[10px] text-slate-300 truncate">${proj.url.replace('https://', '')}</p>
+                    </div>
+                  </div>
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 shadow-[0_0_10px_#34D399]" title="Live on Vercel"></span>
+                </div>
+
+                <!-- Bottom Tech Pills -->
+                <div class="relative z-10 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+                  ${proj.stack.slice(0, 3).map(t => `
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-black/40 text-slate-200 border border-white/10 shrink-0">
+                      ${t}
+                    </span>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Card Body: Title & Bilingual Description -->
+              <div class="p-5 sm:p-6 space-y-2.5">
+                <h3 class="font-display font-bold text-lg sm:text-xl text-white group-hover:text-neon-cyan transition-colors leading-snug">
+                  ${proj.title}
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  ${desc}
+                </p>
+              </div>
+            </div>
+
+            <!-- Card Footer: Live Demo Link + Case Study Modal Trigger -->
+            <div class="px-5 pb-5 sm:px-6 sm:pb-6 pt-3 border-t border-white/10 flex items-center gap-2.5">
+              <a
+                href="${proj.url}"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-interactive="true"
+                class="flex-1 py-2.5 px-4 rounded-xl text-xs font-display font-bold text-space-950 btn-neon-primary flex items-center justify-center gap-2 text-center"
+              >
+                <span>${liveDemoLabel}</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+              </a>
+
+              <button
+                type="button"
+                data-open-proj-modal="${proj.id}"
+                data-interactive="true"
+                title="${specsLabel}"
+                class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-mono text-slate-200 hover:text-neon-cyan transition-all shrink-0"
+              >
+                <i class="fa-solid fa-code"></i>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      init3DTiltCards();
+    }
+
+    // --------------------------------------------------------------------------
+    // 6. 3D PERSPECTIVE TILT EFFECT ON PORTFOLIO CARDS (DESKTOP HOVER)
+    // --------------------------------------------------------------------------
+    function init3DTiltCards() {
+      const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+      if (!isFinePointer) return;
+
+      document.querySelectorAll('.tilt-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -6;
+          const rotateY = ((x - centerX) / centerX) * 6;
+          card.style.transform = `perspective(900px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        });
+      });
+    }
+
+    // --------------------------------------------------------------------------
+    // 7. INTERACTIVE HERO CANVAS ENGINE (3D CONSTELLATION & MOUSE SHOCKWAVE)
+    // --------------------------------------------------------------------------
+    function initHeroCanvas() {
+      const canvas = document.getElementById('hero-particle-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = canvas.parentElement.offsetHeight || window.innerHeight;
+
+      const mouse = { x: width / 2, y: height / 2, radius: 160, active: false };
+      let particles = [];
+      let shockwaves = [];
+
+      function createParticles() {
+        particles = [];
+        const count = window.innerWidth < 768 ? 42 : 88;
+        for (let i = 0; i < count; i++) {
+          const colors = ['#00F2FE', '#4FACFE', '#A855F7', '#FFFFFF'];
+          particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.75,
+            vy: (Math.random() - 0.5) * 0.75,
+            size: Math.random() * 2.2 + 0.8,
+            color: colors[i % colors.length]
+          });
+        }
+      }
+
+      createParticles();
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = canvas.parentElement.offsetHeight || window.innerHeight;
+        createParticles();
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+        mouse.active = true;
+      });
+
+      // Trigger shockwave pulse on button click
+      const pulseBtn = document.getElementById('btn-canvas-pulse');
+      if (pulseBtn) {
+        pulseBtn.addEventListener('click', () => {
+          shockwaves.push({
+            x: width / 2,
+            y: height / 2,
+            radius: 10,
+            maxRadius: Math.max(width, height) * 0.65,
+            alpha: 0.9
+          });
+          // Boost particle velocities briefly
+          particles.forEach(p => {
+            const dx = p.x - width / 2;
+            const dy = p.y - height / 2;
+            const dist = Math.hypot(dx, dy) || 1;
+            p.vx += (dx / dist) * 3.5;
+            p.vy += (dy / dist) * 3.5;
+          });
+          showToast(
+            currentLang === 'id'
+              ? 'Gelombang energi kuantum diaktifkan!'
+              : 'Quantum particle wave triggered!'
+          );
+        });
+      }
+
+      function animateCanvas() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw expanding shockwaves
+        for (let i = shockwaves.length - 1; i >= 0; i--) {
+          const sw = shockwaves[i];
+          sw.radius += 12;
+          sw.alpha *= 0.95;
+          ctx.beginPath();
+          ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(0, 242, 254, ${sw.alpha})`;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          if (sw.radius > sw.maxRadius || sw.alpha < 0.02) {
+            shockwaves.splice(i, 1);
+          }
+        }
+
+        // Update & draw particles
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // Dampen velocity back to normal cruise speed
+          p.vx *= 0.992;
+          p.vy *= 0.992;
+          if (Math.hypot(p.vx, p.vy) < 0.25) {
+            p.vx += (Math.random() - 0.5) * 0.15;
+            p.vy += (Math.random() - 0.5) * 0.15;
+          }
+
+          if (p.x < 0 || p.x > width) p.vx *= -1;
+          if (p.y < 0 || p.y > height) p.vy *= -1;
+
+          // Mouse repulsion / attraction glow
+          if (mouse.active) {
+            const dx = mouse.x - p.x;
+            const dy = mouse.y - p.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < mouse.radius && dist > 0) {
+              const force = (mouse.radius - dist) / mouse.radius;
+              p.x -= (dx / dist) * force * 1.6;
+              p.y -= (dy / dist) * force * 1.6;
+            }
+          }
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+
+          // Connect nearby particles with neon constellation lines
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+            const maxDist = 135;
+            if (dist < maxDist) {
+              const alpha = (1 - dist / maxDist) * 0.28;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(0, 242, 254, ${alpha})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(animateCanvas);
+      }
+
+      animateCanvas();
+    }
+
+    // --------------------------------------------------------------------------
+    // 8. CUSTOM CURSOR LERP ENGINE & SCROLL REVEAL OBSERVER
+    // --------------------------------------------------------------------------
+    function initCustomCursor() {
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      const aura = document.getElementById('mouse-glow-aura');
+      if (!dot || !ring) return;
+
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = `${mouseX}px`;
+        dot.style.top = `${mouseY}px`;
+        if (aura) {
+          aura.style.left = `${mouseX}px`;
+          aura.style.top = `${mouseY}px`;
+        }
+      });
+
+      function renderCursorLoop() {
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = `${ringX}px`;
+        ring.style.top = `${ringY}px`;
+        requestAnimationFrame(renderCursorLoop);
+      }
+      renderCursorLoop();
+
+      // Expand cursor ring when hovering interactive elements
+      document.addEventListener('mouseover', (e) => {
+        const interactive = e.target.closest('a, button, input, textarea, [data-interactive="true"], .tilt-card');
+        document.body.classList.toggle('cursor-hover', Boolean(interactive));
+      });
+    }
+
+    function initScrollReveal() {
+      const items = document.querySelectorAll('.reveal-item');
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      }, { threshold: 0.12 });
+
+      items.forEach(el => observer.observe(el));
+    }
+
+    // --------------------------------------------------------------------------
+    // 9. TOAST NOTIFICATION HELPER
+    // --------------------------------------------------------------------------
+    function showToast(msg) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = 'pointer-events-auto cyber-glass px-4 py-3 rounded-2xl border border-neon-cyan/50 text-xs sm:text-sm font-mono text-white shadow-xl flex items-center gap-2.5 transition-all duration-300';
+      toast.innerHTML = `<i class="fa-solid fa-bolt text-neon-cyan"></i><span>${msg}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+        setTimeout(() => toast.remove(), 260);
+      }, 2800);
+    }
+
+    // --------------------------------------------------------------------------
+    // 10. EVENT LISTENERS (LANGUAGE, FILTER, MODAL, CONTACT FORM)
+    // --------------------------------------------------------------------------
+    function initInteractions() {
+      // Language Switcher Buttons
+      document.getElementById('btn-lang-id').addEventListener('click', () => setLanguage('id'));
+      document.getElementById('btn-lang-en').addEventListener('click', () => setLanguage('en'));
+
+      // Mobile Navigation Drawer Toggle
+      const mobileMenuBtn = document.getElementById('btn-mobile-menu');
+      const mobileDrawer = document.getElementById('mobile-menu-drawer');
+      const mobileIcon = document.getElementById('icon-mobile-menu');
+
+      mobileMenuBtn.addEventListener('click', () => {
+        const isHidden = mobileDrawer.classList.toggle('hidden');
+        mobileIcon.className = isHidden ? 'fa-solid fa-bars-staggered text-base' : 'fa-solid fa-xmark text-lg';
+      });
+
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileDrawer.classList.add('hidden');
+          mobileIcon.className = 'fa-solid fa-bars-staggered text-base';
+        });
+      });
+
+      // Portfolio Category Filter Buttons
+      document.getElementById('portfolio-filter-bar').addEventListener('click', (e) => {
+        const btn = e.target.closest('.work-filter-btn');
+        if (!btn) return;
+        currentPortfolioFilter = btn.getAttribute('data-filter') || 'all';
+
+        document.querySelectorAll('.work-filter-btn').forEach(b => {
+          const active = b.getAttribute('data-filter') === currentPortfolioFilter;
+          b.className = active
+            ? 'work-filter-btn shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-neon-cyan text-space-950 shadow-md shadow-neon-cyan/25'
+            : 'work-filter-btn shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all bg-space-800 text-slate-300 hover:text-white border border-white/10';
+        });
+
+        renderPortfolio();
+      });
+
+      // Project Tech Specs Modal
+      const projModal = document.getElementById('modal-project-detail');
+      document.getElementById('portfolio-grid').addEventListener('click', (e) => {
+        const trigger = e.target.closest('[data-open-proj-modal]');
+        if (!trigger) return;
+        const projId = trigger.getAttribute('data-open-proj-modal');
+        const proj = PORTFOLIO_PROJECTS.find(p => p.id === projId);
+        if (!proj) return;
+
+        document.getElementById('modal-proj-tag').textContent = `${proj.number} // ${proj.tag}`;
+        document.getElementById('modal-proj-title').textContent = proj.title;
+        document.getElementById('modal-proj-desc').textContent = currentLang === 'id' ? proj.detailId : proj.detailEn;
+        document.getElementById('modal-proj-link').href = proj.url;
+        document.getElementById('modal-proj-stack').innerHTML = proj.stack
+          .map(s => `<span class="px-3 py-1 rounded-xl bg-space-950 border border-neon-cyan/30 font-mono text-xs text-neon-cyan">${s}</span>`)
+          .join('');
+
+        projModal.classList.remove('hidden');
+      });
+
+      const closeProjModal = () => projModal.classList.add('hidden');
+      document.getElementById('btn-close-proj-modal').addEventListener('click', closeProjModal);
+      document.getElementById('btn-modal-close-secondary').addEventListener('click', closeProjModal);
+      projModal.addEventListener('click', (e) => {
+        if (e.target === projModal) closeProjModal();
+      });
+
+      // Copy Official Email Button
+      document.getElementById('btn-copy-email').addEventListener('click', () => {
+        const email = 'zafrielakn3@gmail.com';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).catch(() => {});
+        } else {
+          const temp = document.createElement('input');
+          temp.value = email;
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand('copy');
+          temp.remove();
+        }
+        const labelEl = document.getElementById('copy-email-text');
+        if (labelEl) {
+          labelEl.textContent = currentLang === 'id' ? 'Tersalin!' : 'Copied!';
+          setTimeout(() => {
+            labelEl.textContent = I18N_DICTIONARY[currentLang]['contact.copyBtn'];
+          }, 2000);
+        }
+        showToast(currentLang === 'id' ? 'Alamat email zafrielakn3@gmail.com disalin!' : 'Email zafrielakn3@gmail.com copied!');
+      });
+
+      // Service Pills inside Contact Form
+      document.getElementById('service-selector-pills').addEventListener('click', (e) => {
+        const pill = e.target.closest('.service-pill');
+        if (!pill) return;
+        selectedServicePill = pill.getAttribute('data-service-pill');
+        document.querySelectorAll('.service-pill').forEach(p => {
+          const isSelected = p.getAttribute('data-service-pill') === selectedServicePill;
+          p.className = isSelected
+            ? 'service-pill px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-neon-cyan/15 text-neon-cyan border border-neon-cyan/50 transition-all'
+            : 'service-pill px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-space-950/80 text-slate-400 border border-white/10 hover:text-white transition-all';
+        });
+      });
+
+      // Fill Sample Brief Button
+      document.getElementById('btn-fill-demo-brief').addEventListener('click', () => {
+        document.getElementById('contact-name').value = 'Rama Wijaya — CTO NovaLabs';
+        document.getElementById('contact-email').value = 'rama@novalabs.io';
+        document.getElementById('contact-message').value = currentLang === 'id'
+          ? 'Halo Tim Zastech.id, kami ingin membangun platform web interaktif berbasis WebGL dan prototipe aplikasi SaaS dengan desain Dark Mode futuristik untuk peluncuran Q4 2026.'
+          : 'Hello Zastech.id Team, we are looking to build an interactive WebGL product showcase and a high-performance SaaS web app prototype for our Q4 2026 global launch.';
+        document.getElementById('error-name').classList.add('hidden');
+        document.getElementById('error-email').classList.add('hidden');
+        document.getElementById('error-message').classList.add('hidden');
+      });
+
+      // Real-time Contact Form Validation & Submission
+      const contactForm = document.getElementById('contact-form');
+      const nameInput = document.getElementById('contact-name');
+      const emailInput = document.getElementById('contact-email');
+      const msgInput = document.getElementById('contact-message');
+
+      function validateEmail(val) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+      }
+
+      nameInput.addEventListener('input', () => {
+        if (nameInput.value.trim().length >= 2) {
+          document.getElementById('error-name').classList.add('hidden');
+        }
+      });
+
+      emailInput.addEventListener('input', () => {
+        if (validateEmail(emailInput.value.trim())) {
+          document.getElementById('error-email').classList.add('hidden');
+        }
+      });
+
+      msgInput.addEventListener('input', () => {
+        if (msgInput.value.trim().length >= 10) {
+          document.getElementById('error-message').classList.add('hidden');
+        }
+      });
+
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nameVal = nameInput.value.trim();
+        const emailVal = emailInput.value.trim();
+        const msgVal = msgInput.value.trim();
+
+        let valid = true;
+        if (nameVal.length < 2) {
+          document.getElementById('error-name').classList.remove('hidden');
+          valid = false;
+        } else {
+          document.getElementById('error-name').classList.add('hidden');
+        }
+
+        if (!validateEmail(emailVal)) {
+          document.getElementById('error-email').classList.remove('hidden');
+          valid = false;
+        } else {
+          document.getElementById('error-email').classList.add('hidden');
+        }
+
+        if (msgVal.length < 10) {
+          document.getElementById('error-message').classList.remove('hidden');
+          valid = false;
+        } else {
+          document.getElementById('error-message').classList.add('hidden');
+        }
+
+        if (!valid) return;
+
+        const successBox = document.getElementById('contact-success-box');
+        const detailEl = document.getElementById('contact-success-detail');
+        detailEl.textContent = currentLang === 'id'
+          ? `Terima kasih, ${nameVal}! Brief Anda untuk layanan "${selectedServicePill}" telah kami terima dan salinan konfirmasi dikirim ke ${emailVal}.`
+          : `Thank you, ${nameVal}! Your brief for "${selectedServicePill}" has been received and a confirmation copy was logged for ${emailVal}.`;
+
+        successBox.classList.remove('hidden');
+        contactForm.reset();
+        showToast(
+          currentLang === 'id'
+            ? 'Brief proyek berhasil dikirim ke Zastech.id!'
+            : 'Project brief transmitted to Zastech.id!'
+        );
+      });
+    }
+
+    // Initialize Everything on DOMContentLoaded
+    window.addEventListener('DOMContentLoaded', () => {
+      setLanguage(currentLang);
+      initInteractions();
+      initHeroCanvas();
+      initCustomCursor();
+      initScrollReveal();
+    });
+  </script>
+</body>
+</html>
